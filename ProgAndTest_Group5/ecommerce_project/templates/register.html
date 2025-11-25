@@ -1,0 +1,32 @@
+<!-- register.html -->
+{% extends "base.html" %}
+
+{% block title %}Đăng ký - TechStore{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="text-center mb-4">Đăng ký</h4>
+                <form method="POST">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="name" placeholder="Họ và tên" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Đăng ký</button>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <a href="{{ url_for('login') }}">Đã có tài khoản? Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

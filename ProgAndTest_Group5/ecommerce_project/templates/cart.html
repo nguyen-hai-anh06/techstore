@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Giỏ hàng - TechStore{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Giỏ hàng</h1>
+
+{% if cart_items %}
+<div class="row">
+    <div class="col-md-8">
+        {% for item in cart_items %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-3">
+                        <img src="{{ item.product.image }}" class="img-fluid rounded" alt="{{ item.product.name }}">
+                    </div>
+                    <div class="col-9">
+                        <h6>{{ item.product.name }}</h6>
+                        <p class="text-muted mb-1">{{ item.product.price|currency }}</p>
+                        <div class="d-flex align-items-center">
+                            <form method="POST" action="{{ url_for('update_cart', item_id=item.id) }}" class="d-flex">
+                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" 
+                                       max="{{ item.product.stock }}" class="form-control form-control-sm me-2" style="width: 80px;">
+                                <button type="submit" class="btn btn-sm btn-outline-primary">Cập nhật</button>
+                            </form>
+                            <span class="ms-3 fw-bold text-primary">{{ item.subtotal|currency }}</span>
+                            <a href="{{ url_for('remove_from_cart', item_id=item.id) }}" class="btn btn-sm btn-outline-danger ms-3">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tổng đơn hàng</h5>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Tạm tính:</span>
+                    <span>{{ total|currency }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Phí vận chuyển:</span>
+                    <span class="text-success">Miễn phí</span>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between mb-3">
+                    <strong>Tổng cộng:</strong>
+                    <strong class="text-danger">{{ total|currency }}</strong>
+                </div>
+                
+                <form method="POST" action="{{ url_for('checkout') }}">
+                    <button type="submit" class="btn btn-success w-100 mb-2">Thanh toán</button>
+                </form>
+                <a href="{{ url_for('products') }}" class="btn btn-outline-primary w-100">Tiếp tục mua sắm</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="text-center py-5">
+    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+    <h3 class="text-muted">Giỏ hàng trống</h3>
+    <a href="{{ url_for('products') }}" class="btn btn-primary">Mua sắm ngay</a>
+</div>
+{% endif %}
+{% endblock %}

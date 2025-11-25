@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - TechStore{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ product.image }}" class="img-fluid detail-image" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-6">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('products') }}">Sản phẩm</a></li>
+                <li class="breadcrumb-item active">{{ product.name }}</li>
+            </ol>
+        </nav>
+        
+        <h1 class="display-6">{{ product.name }}</h1>
+        <p class="text-muted">{{ product.description }}</p>
+        
+        <div class="mb-3">
+            <h2 class="text-danger">{{ product.price|currency }}</h2>
+            <span class="badge bg-{{ 'success' if product.stock > 0 else 'danger' }} fs-6">
+                {% if product.stock > 0 %}
+                    📦 Còn {{ product.stock }} sản phẩm
+                {% else %}
+                    ❌ Hết hàng
+                {% endif %}
+            </span>
+        </div>
+        
+        <div class="d-grid gap-2 d-md-flex">
+            {% if product.stock > 0 %}
+                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-primary btn-lg flex-fill">
+                    <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
+                </a>
+            {% else %}
+                <button class="btn btn-secondary btn-lg flex-fill" disabled>
+                    <i class="fas fa-times-circle"></i> Tạm hết hàng
+                </button>
+            {% endif %}
+            <a href="{{ url_for('products') }}" class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+        </div>
+        
+        <!-- Product Features -->
+        <div class="mt-4">
+            <h5>📦 Thông tin sản phẩm</h5>
+            <ul class="list-unstyled">
+                <li>✅ Bảo hành 12 tháng</li>
+                <li>✅ Giao hàng miễn phí</li>
+                <li>✅ Đổi trả trong 7 ngày</li>
+                <li>✅ Hỗ trợ 24/7</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Related Products -->
+<hr class="my-5">
+<h3>🛍️ Sản phẩm liên quan</h3>
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> 
+            Khám phá thêm các sản phẩm tương tự trong cửa hàng của chúng tôi!
+        </div>
+        <a href="{{ url_for('products') }}" class="btn btn-outline-primary">
+            <i class="fas fa-boxes"></i> Xem tất cả sản phẩm
+        </a>
+    </div>
+</div>
+{% endblock %}

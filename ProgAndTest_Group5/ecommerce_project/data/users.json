@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Admin",
+    "email": "admin@example.com",
+    "password_hash": "$2b$12$kk5TEa1kTjk0bbfGY9027.42PZ0KvCu39O.Q7m/jpeZ4Chb360VFe",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "name": "Demo User",
+    "email": "user@example.com",
+    "password_hash": "$2b$12$/y2APAvibaV85FK9VewAVeiqXhnaXJ/B5gC1CETjAYmD8s1F4XJO6",
+    "role": "user"
+  },
+  {
+    "id": 3,
+    "name": "bảo",
+    "email": "giabao2252006@gmail.com",
+    "password_hash": "$2b$12$tlKBgo4vR0h0oPGgOG.ZkOdKLr9A6VDJqg7.o8IPbq2N70MTJw/mG",
+    "role": "user"
+  },
+  {
+    "id": 4,
+    "name": "Huỳnh Phúc Thành",
+    "email": "thanhphuchuynh2210@gmail.com",
+    "password_hash": "$2b$12$ys2ddMdg2cqanxaS4.xpoOuvH0QaEPL.JRLvuD7/pLMAgT5fhNbV2",
+    "role": "user"
+  },
+  {
+    "id": 5,
+    "name": "koi",
+    "email": "dangkhoi03062006@gmail.com",
+    "password_hash": "$2b$12$XeEyXqOTv4O7zLJFWkoIQu1X5t8UqnshwAWG6KRQI9ZT769y/aXVe",
+    "role": "user"
+  },
+  {
+    "id": 6,
+    "name": "koi",
+    "email": "khoind7264@gmail.com",
+    "password_hash": "$2b$12$DyFKx1QRWRtxr9KZXlAPyOJ9MlMZhKVH9xdXVscmkXrPIr3Y7nakS",
+    "role": "user"
+  }
+]

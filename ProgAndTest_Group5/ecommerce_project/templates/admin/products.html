@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Quản lý sản phẩm - TechStore{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-boxes"></i> Quản lý sản phẩm</h1>
+    <a href="{{ url_for('admin_add_product') }}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Thêm sản phẩm
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Hình ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Tồn kho</th>
+                        <th>Danh mục</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>
+                            <img src="{{ product.image }}" width="50" height="50" class="rounded" alt="{{ product.name }}">
+                        </td>
+                        <td>
+                            <strong>{{ product.name }}</strong>
+                            <br>
+                            <small class="text-muted">{{ product.description[:50] }}...</small>
+                        </td>
+                        <td>{{ product.price|currency }}</td>
+                        <td>
+                            <span class="badge bg-{{ 'success' if product.stock > 10 else 'warning' if product.stock > 0 else 'danger' }}">
+                                {{ product.stock }}
+                            </span>
+                        </td>
+                        <td>
+                            {% set category = categories | selectattr("id", "equalto", product.category_id) | first %}
+                            {{ category.name if category else 'N/A' }}
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a href="{{ url_for('admin_edit_product', product_id=product.id) }}" class="btn btn-outline-primary" title="Sửa">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" action="{{ url_for('admin_delete_product', product_id=product.id) }}" class="d-inline">
+                                    <button type="submit" class="btn btn-outline-danger" title="Xóa" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="mt-3">
+    <div class="alert alert-info">
+        <i class="fas fa-info-circle"></i>
+        <strong>Thông tin:</strong> Hiện có <strong>{{ products|length }}</strong> sản phẩm trong hệ thống.
+    </div>
+</div>
+{% endblock %}

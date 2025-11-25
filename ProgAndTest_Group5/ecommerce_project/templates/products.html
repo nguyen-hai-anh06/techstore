@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Sản phẩm - TechStore{% endblock %}
+
+{% block content %}
+<!-- Search -->
+<form method="GET" class="row mb-4">
+    <div class="col-md-6">
+        <input type="text" name="search" class="form-control" placeholder="Tìm sản phẩm..." value="{{ search_query }}">
+    </div>
+    <div class="col-md-4">
+        <select name="category" class="form-select" onchange="this.form.submit()">
+            <option value="">Tất cả danh mục</option>
+            {% for category in categories %}
+                {% if not category.parent_id %}
+                <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">Tìm</button>
+    </div>
+</form>
+
+<!-- Products -->
+<div class="row">
+    {% for product in products %}
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card h-100">
+            <img src="{{ product.image }}" class="card-img-top product-img" alt="{{ product.name }}">
+            <div class="card-body d-flex flex-column">
+                <h6 class="card-title">{{ product.name }}</h6>
+                <p class="card-text text-muted small">{{ product.description[:60] }}...</p>
+                <div class="mt-auto">
+                    <h5 class="text-danger mb-2">{{ product.price|currency }}</h5>
+                    <div class="d-flex justify-content-between">
+                        <span class="badge bg-{{ 'success' if product.stock > 0 else 'danger' }}">
+                            {{ product.stock }} sp
+                        </span>
+                        <div>
+                            <a href="{{ url_for('product_detail', product_id=product.id) }}" 
+                               class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            {% if product.stock > 0 %}
+                            <a href="{{ url_for('add_to_cart', product_id=product.id) }}" 
+                               class="btn btn-sm btn-primary">
+                                <i class="fas fa-cart-plus"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% if not products %}
+<div class="text-center py-5">
+    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+    <h4 class="text-muted">Không tìm thấy sản phẩm</h4>
+</div>
+{% endif %}
+{% endblock %}

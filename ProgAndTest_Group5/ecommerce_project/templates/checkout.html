@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Thanh toán - TechStore{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Thanh toán</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Thông tin thanh toán</h5>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" value="{{ session.user_name }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Số điện thoại</label>
+                        <input type="tel" class="form-control" placeholder="0987 654 321" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Địa chỉ giao hàng</label>
+                        <input type="text" class="form-control" placeholder="Số nhà, đường, phường/xã..." required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Ghi chú</label>
+                        <textarea class="form-control" rows="2" placeholder="Ghi chú cho người bán..."></textarea>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <strong>Lưu ý:</strong> Thanh toán khi nhận hàng (COD)
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100">Hoàn tất đơn hàng</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Đơn hàng của bạn</h5>
+                <div class="alert alert-warning">
+                    Vui lòng kiểm tra kỹ thông tin trước khi xác nhận!
+                </div>
+                <a href="{{ url_for('cart') }}" class="btn btn-outline-primary w-100 mb-3">Quay lại giỏ hàng</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Điện thoại",
+    "parent_id": null
+  },
+  {
+    "id": 2,
+    "name": "Laptop",
+    "parent_id": null
+  },
+  {
+    "id": 3,
+    "name": "Tablet",
+    "parent_id": null
+  },
+  {
+    "id": 4,
+    "name": "Apple",
+    "parent_id": 1
+  },
+  {
+    "id": 5,
+    "name": "Samsung",
+    "parent_id": 1
+  },
+  {
+    "id": 6,
+    "name": "Xiaomi",
+    "parent_id": 1
+  },
+  {
+    "id": 7,
+    "name": "Gaming",
+    "parent_id": null
+  },
+  {
+    "id": 8,
+    "name": "Phụ kiện",
+    "parent_id": null
+  }
+]
